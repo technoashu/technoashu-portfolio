@@ -41,5 +41,6 @@ Self-directed builds, shipped without a client brief — from a live revenue-val
 | [Kaya: A Translator Built for the Words Generic Translators Get Wrong](independent-products/01-kaya-caregiver-translator.md) | A German↔English translator for migrant caregivers — live, deployed, and revenue-validated. |
 | [A White-Label "On-Trip Companion" App for Travel Agents](independent-products/02-travel-companion-platform.md) | Validated on a real family trip before generalizing into a multi-tenant platform. |
 | [A Shared-Screen Party Game Hub, Shipped Start to Finish](independent-products/03-party-games-hub.md) | Three games, one engine, zero setup — complete with nothing left to second-guess. |
+| [Household Finance Reconciliation Pipeline](independent-products/04-finance-reconciliation-pipeline.md) | A skill pipeline that reconciles real bank/credit-card statements into a trustworthy ledger, surfacing only genuine ambiguities for review. |
 
 *Kaya and the travel platform are AI-driven products. Party Games isn't — it's included on purpose, as the one entry in this repo with a clean, unambiguous finish line.*
