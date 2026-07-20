@@ -14,6 +14,18 @@ The tool only has ground-truth authority over what it's actually told to scan. A
 
 `cc.py` is a Python CLI (with a small local web dashboard) that treats a registry of project paths as its only source of truth. On every scan it reads each registered project's real status files, decision log, open failure signals, and git state directly — no caching, no symlinks, nothing that can silently go stale. It turns that into **decision cards**: situation, evidence (the actual bytes it read), options, a recommendation, and a reversibility rating — ranked into three tiers (needs-you, can-wait, fyi) so the signal that actually requires a human isn't buried under routine housekeeping. Where the answer genuinely isn't knowable from what it read, it refuses to guess: it writes a clarification marker back into that project instead of inventing a plausible one, and the marker resurfaces on the next scan until it's answered.
 
+```mermaid
+flowchart TD
+    A[Scan registered projects] --> B[Read ground-truth state]
+    B --> C[Generate decision cards]
+    C --> D{Reversible?}
+    D -->|Yes| E[Execute directly]
+    D -->|No| F[Require --approve token]
+    F --> G{Token matches current state?}
+    G -->|Yes| E
+    G -->|No| H[Refuse]
+```
+
 Every card can drive a follow-up action — dismiss, snooze, run a suggested fix, execute a next step — and every action is written to a hash-chained journal (choice, reason, expected outcome), so decisions are auditable and, on a scheduled review pass, checked against what actually happened.
 
 The most consequential design decision is that capability and safety are tuned separately. Anything reversible — reading, flagging, snoozing, drafting a fix — runs with no friction. Anything irreversible — a commit, a push, a deploy, deleting state — is refused by default. Executing it requires an explicit `--approve <token>` flag, and the token isn't a static secret: it's a hash of the project, the chosen action, *and* the exact ground-truth state the human reviewed (e.g. the current commit history) at approval time. If that state changes before the flag is used — a new commit lands, the branch moves — the token silently stops matching. A captured or reused approval can't execute against a world that's since moved on.
@@ -26,4 +38,4 @@ A tool that turns "context-switch across dozens of projects to see what needs at
 
 ## What I'd do differently
 
-Registry maintenance is still manual — a new project has to be explicitly registered before the tool can see it. Having the tool detect and propose newly-created project directories itself, rather than requiring that registration step, is the natural next move.
+New projects are invisible to it until I remember to register them, which defeats some of the point. It should notice new project directories on its own and propose adding them, instead of waiting to be told.

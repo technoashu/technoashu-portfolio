@@ -2,7 +2,11 @@
 
 A selection of write-ups drawn from ongoing private work, showing how I actually build: systems for orchestrating AI agents, AI applied to real business problems, and independent products shipped end to end.
 
-**Contact:** [technoashu@gmail.com](mailto:technoashu@gmail.com)
+> All write-ups are generalized from private client and personal work — company names, proprietary figures, and identifying details have been removed or replaced with generic descriptions where the underlying work involved confidential material.
+
+**Contact:** [technoashu@gmail.com](mailto:technoashu@gmail.com) · *Portfolio compiled: July 2026.*
+
+Evaluating engineering depth? Start with **Track 1**. Evaluating business impact? Start with **Track 2**.
 
 Each write-up follows the same shape: **Problem → Constraint → Approach → Outcome → What I'd do differently** — the constraint and retrospective sections are there deliberately, because what a project couldn't do (and what I'd change) is as informative as what it did.
 
@@ -38,8 +42,4 @@ Self-directed builds, shipped without a client brief — from a live revenue-val
 | [A White-Label "On-Trip Companion" App for Travel Agents](independent-products/02-travel-companion-platform.md) | Validated on a real family trip before generalizing into a multi-tenant platform. |
 | [A Shared-Screen Party Game Hub, Shipped Start to Finish](independent-products/03-party-games-hub.md) | Three games, one engine, zero setup — complete with nothing left to second-guess. |
 
----
-
-*Portfolio compiled: July 2026.*
-
-All write-ups are generalized from private client and personal work — company names, proprietary figures, and identifying details have been removed or replaced with generic descriptions where the underlying work involved confidential material.
+*Kaya and the travel platform are AI-driven products. Party Games isn't — it's included on purpose, as the one entry in this repo with a clean, unambiguous finish line.*

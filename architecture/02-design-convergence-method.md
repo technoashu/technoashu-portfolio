@@ -25,6 +25,18 @@ The single most common error caught by this pass is *mechanism drawn as structur
 
 **2. Propose → push back / concede / synthesize → re-capture.** Every turn mutates a concrete artifact — a diagram, a doc — never just talk. One side proposes a change; the other must do one of three things, not just nod: push back (with a reason), concede outright, or synthesize a third option that resolves what both were reaching for. Whichever happens, the decision is written back into the artifact immediately, so the shared object of the conversation stays current.
 
+```mermaid
+flowchart LR
+    A[Propose a change] --> B{Reviewer response}
+    B -->|Push back| C[State the reason]
+    B -->|Concede| D[Adopt as proposed]
+    B -->|Synthesize| E[Third option]
+    C --> F[Re-capture into artifact]
+    D --> F
+    E --> F
+    F --> A
+```
+
 Progress across a session shows up as the *questions* maturing: "what's missing?" (completeness) gives way to "what's misclassified?" (invariant vs. policy vs. mechanism), which gives way to "what's misleading?" (will someone who wasn't in this conversation misread it?). Reaching "misleading" is the signal the design has stabilized — not a fixed number of rounds, not a checklist score.
 
 The key insight: **agreement is a drift signal, not a consensus signal.** If a stretch of the session goes by with nothing but agreement, the default assumption should be that *the reviewer* has drifted — stopped applying real scrutiny — not that the proposer has become correct. Sustained frictionless agreement is far more often a sign that critical evaluation has quietly lapsed than a sign the design reached truth. The discipline is to treat a smooth patch as a prompt to look *harder*, not as permission to relax.
@@ -35,4 +47,4 @@ Architecture mistakes are expensive precisely because they're invisible at desig
 
 ## What I'd do differently
 
-The method still relies on a human noticing the "agreement is a drift signal" cue in the moment. A version that flags suspiciously smooth stretches automatically — a simple turn-count-without-pushback heuristic, say — would make the discipline harder to skip under time pressure than relying on someone remembering to watch for it.
+Right now it only works if someone actually notices the smooth stretch in the moment — nothing catches it automatically. A simple heuristic (flag N turns in a row with no pushback) would move that catch out of memory and into the tooling, where it can't be skipped under deadline pressure.

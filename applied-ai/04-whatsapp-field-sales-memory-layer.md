@@ -8,6 +8,8 @@ Frontline field reps see things every day that never make it into the enterprise
 
 This isn't a hypothesis. A field visit and analysis of several months of a pharma distributor's own historical CRM export data confirmed it at scale: roughly 7% of logged remarks were pure noise ("ok", "good", a stray character), the large majority of no-order visits recorded no reason for the lost sale, and a meaningful share of visits where the remark claimed an order contradicted the actual transaction record. The form was being filled in — and the data still couldn't be trusted.
 
+**Engagement:** Solo build — a single-founder project; the pharma-distributor pilot is a real but early, single-operator deployment.
+
 ## The constraint
 
 The gold-dataset adjudication that keeps the system honest only scales as far as the independent adjudicator's own bandwidth. At a handful of reps this is cheap to run properly; at hundreds, the weekly sampling rate would have to shrink — which is exactly the point where the integrity check becomes most valuable and least frequently exercised.
@@ -20,7 +22,7 @@ Underneath, raw input flows through a strict pipeline: the original voice note o
 
 Making confirmation the gate that promotes data into permanent memory creates an obvious failure mode: if reps confirm without really reading — rubber-stamping — wrong extractions get canonized as truth. Worse, if the system ever learns from its own confirmed data, it starts training on its own mistakes: a silent feedback loop where the corpus quietly rots while every dashboard still shows healthy confirmation rates.
 
-The design answer is to keep two datasets permanently separate and never let them touch. The **working corpus** is every confirmed event — the system's growing knowledge, genuinely useful, but only as reliable as the rep's attention was at the moment of confirming. The **gold dataset** is a small, independently adjudicated set of ground truth, built and checked by someone who is never the person tuning the extraction logic, and walled off at the access layer so the live pipeline can neither read nor write it. Extraction quality is scored only against gold — never against how often reps simply say yes — and the model is only ever retrained on gold, never on the raw corpus, so it can't launder its own errors back into "learning."
+The design answer is to keep two datasets permanently separate and never let them touch. The **working corpus** is every confirmed event — the system's growing knowledge, genuinely useful, but only as reliable as the rep's attention was at the moment of confirming. The **gold dataset** is a small, independently adjudicated set of ground truth, built and checked by someone who is never the person tuning the extraction logic, and walled off at the access layer so the live pipeline can neither read nor write it. Extraction quality is scored only against gold — never against how often reps simply say yes — and the model is only ever retrained on gold, never on the raw corpus, so it can't launder its own errors back into "learning." In plain terms: it replaces a rep's paper diary with a system that only trusts data once a human has actually confirmed it — and it catches the moment that trust stops being earned.
 
 The integrity check itself is a single, deliberately simple number: **confirmation-rate minus gold-precision**. When that gap sits near zero, confirmations are meaningful signal. When confirmation rate stays high while gold-precision quietly slips, the widening gap is the early warning — reps are still agreeing, but agreement has stopped meaning "correct." In practice, an independent adjudicator re-checks a weekly sample of confirmed events against gold; if the gap widens — especially alongside a rising correction rate — any recently changed setting gets rolled back before anything new ships. The same gap gates product decisions directly: a shorter, easier-to-confirm daily recap is only allowed to stay in the product if it doesn't widen the gap; if it does, the interface reverts to the fuller view.
 
@@ -30,4 +32,4 @@ The problem was validated against real historical data from a pharma distributor
 
 ## What I'd do differently
 
-The interaction pattern is proven with only one rep so far. The real test of the drift detector is what happens once confirmation habits diverge across many reps with different attention levels — something a single-rep deployment can't yet show, and the natural next milestone before claiming the pattern generalizes.
+One rep proves the interaction pattern works for one rep. The real test — what happens once confirmation habits diverge across many reps with different attention spans — is one a single-person deployment structurally can't show yet.

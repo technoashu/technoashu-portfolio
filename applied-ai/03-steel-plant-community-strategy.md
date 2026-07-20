@@ -6,6 +6,8 @@
 
 A steel manufacturer had just commissioned a new plant near a community already living with two hard realities: seasonal agricultural-residue burning that fouls the regional airshed, and a large pool of women's labor sitting outside the formal economy. Leadership wanted a multi-decadal community and environment commitment — but explicitly rejected the default output of this kind of engagement: a glossy CSR diagnostic that states problems everyone already knows and prescribes nothing actionable. The brief was blunt — a diagnosis alone is googleable. Leadership needed something they could actually decide against: which levers to fund, in what sequence, at what cost, with the arithmetic shown rather than narrated.
 
+**Engagement:** Client engagement — commissioned work for a real steel manufacturer; company and location are withheld under the engagement's confidentiality terms.
+
 ## The constraint
 
 Every load-bearing number in the eventual decision model had to be either sourced field data or explicitly left blank — never a plausible-sounding estimate. That discipline made the deliverable honest, but it also meant the deliverable alone couldn't answer "is this worth doing"; it could only state the one cheap test that would.
@@ -27,4 +29,4 @@ Phase 1's ground-truth findings were signed off by leadership as an accurate acc
 
 ## What I'd do differently
 
-The decision rule (non-positive margin = no-go) is clean but binary. A version with a sensitivity band around the breakeven point would give leadership a better sense of how close a "yes" actually is, rather than only which side of zero it lands on.
+A clean binary rule — non-positive margin means no-go — is easy to act on, but it hides how close a call actually is. A sensitivity band around breakeven would tell leadership not just which side of zero they're on, but how comfortably.

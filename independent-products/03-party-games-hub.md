@@ -20,4 +20,4 @@ Complete and shipped — all planned milestones finished, post-launch code revie
 
 ## What I'd do differently
 
-Genuinely, not much — the only open item is whether to make the repository public for a free GitHub Pages deploy instead of its current Vercel hosting. It's included here precisely because it's useful to show a project with a real, unambiguous finish line, next to others that are still mid-flight.
+The word lists and content are fixed at build time — fine for a personal project, but it means nobody else can make this their own without editing code. If I revisited it, I'd let a host swap in their own words and categories without touching the source.

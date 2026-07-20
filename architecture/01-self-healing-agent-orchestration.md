@@ -33,6 +33,19 @@ The dividing line is mechanical: Tier 1 fires on deterministic events and needs 
 
 The lifecycle: **frame** widens a fuzzy problem before anything narrows; **forge** hardens it into a rigorous prompt via interrogation; **kickoff** lays the build out as milestones; **observation** logs material decisions as they happen; **trace/rca** reconstruct what went wrong when something breaks, verify-first rather than theorize-first. Every stage that produces something a downstream stage will rely on — a forged prompt, an RCA's proposed fix, a finished spec — passes through **challenge**: independent, blind agents whose only mandate is to *refute* it, returning a fixed verdict (ship / revise / kill) plus ranked, fixable weaknesses.
 
+```mermaid
+sequenceDiagram
+    participant S as Sandbox
+    participant H as SessionStart Hook
+    participant M as Private Master Repo
+    participant C as ~/.claude/
+    S->>H: New session starts
+    H->>M: Read source of truth
+    H->>C: Symlink skills + agents
+    Note over C: Broken links repaired,<br/>correct links skipped
+    C-->>S: Ready before first prompt
+```
+
 What makes this novel:
 
 **1. Architecture-as-code durability.** Nothing is hand-installed. A `SessionStart` hook (`sync-global-skills.sh`) walks a single private master repo and idempotently symlinks every skill and agent into `~/.claude/`, repairing anything broken and skipping anything already correct. If a sandbox prunes the whole directory, the next session heals it before the first prompt — the source of truth never lived in the disposable location to begin with.
@@ -49,4 +62,4 @@ A personal Claude Code environment that survives environment churn by constructi
 
 ## What I'd do differently
 
-The failure-signal loop still requires a manual drain pass rather than auto-resolving; closing that loop so signals resolve themselves instead of accumulating for a periodic sweep is the natural next hardening step.
+The failure-signal loop still needs a person to run the drain pass. I'd rather it resolved signals on its own as they happened than let them stack up for a periodic sweep.

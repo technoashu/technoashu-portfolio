@@ -23,6 +23,19 @@ theorg treats this as an organizational-design problem, not a prompting problem.
 
 Two mechanisms carry most of the weight:
 
+```mermaid
+flowchart TD
+    A[Decision arises] --> B{Serves genuinely different goals?}
+    B -->|Yes| Z[Escalate]
+    B -->|No| C{Violates a standing rule?}
+    C -->|Yes| Z
+    C -->|No| D{Kills/reshapes something foundational?}
+    D -->|Yes| Z
+    D -->|No| E{Cross-functional, active disagreement?}
+    E -->|Yes| Z
+    E -->|No| F[Decide internally]
+```
+
 **A hard escalation filter.** Before bubbling a decision up, an agent runs a four-question gate, stopping at the first "yes": Do the options serve genuinely different goals? Does this violate a standing rule? Would it kill or reshape something foundational? Is this cross-functional with active disagreement between peers? All four "no" → decide internally. This alone kills most unnecessary escalation traffic — status updates never reach the top.
 
 **Defense-pairing.** Instead of one agent unilaterally setting a limit, opposing roles argue opposite sides of the same resource question. The CFO-equivalent role defends a resource *ceiling* (don't overspend); the throughput-equivalent role attacks the *floor* (don't leave capacity idle). Neither wins by default — the tension between them is the control. A second pair works the same way over work quality: one role holds the line on what's already built, the other pushes against it with change proposals. The disagreement itself is the useful signal, not a bug to resolve away.
@@ -37,4 +50,4 @@ A working governance layer with six defined roles, a mechanical escalation gate,
 
 ## What I'd do differently
 
-The escalation filter's four questions are currently applied by judgment rather than mechanically checked. Making that gate itself testable — not just documented — is the natural next hardening step, especially before adding a seventh role.
+The four-question filter lives in a document, not in code — an agent could misapply it and nothing would catch that. Before adding a seventh role, I want that gate itself under test, not just under instruction.

@@ -27,4 +27,4 @@ Kaya is live and deployed, not a demo — real user signups, an active waitlist,
 
 ## What I'd do differently
 
-The glossary flywheel currently depends on a person reviewing flagged corrections before they go live. Automating that review step — or at least tightening the confidence-tier boundaries using the feedback already collected — is the natural next iteration now that real usage data exists to tune against.
+A person still has to review every flagged correction before it goes live — the flywheel has a human bottleneck built in. With real usage data finally in hand, tightening the confidence-tier boundaries against it (or automating the review itself) matters more right now than adding new features.
